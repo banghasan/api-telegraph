@@ -32,12 +32,6 @@ services:
       - .env
     ports:
       - "8000:8000"
-    networks:
-      - hasanNet
-      
-networks:
-  hasanNet:
-    external: true
 ```
 
 ### env
