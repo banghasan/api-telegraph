@@ -1,11 +1,5 @@
 import { Head } from "$fresh/runtime.ts";
 
-const steps = [
-  "Salin `.env.example` ➜ `.env` lalu isi BASIC_AUTH_* dan TELEGRAPH_TOKEN",
-  "Jalankan `deno task dev` atau kemas dengan Docker (`banghasan/api-telegraph`)",
-  "Kirim POST ke `/api/telegraph` dengan Basic Auth & payload JSON",
-];
-
 const rows = [
   { label: "Endpoint", value: "POST /api/telegraph" },
   { label: "Auth", value: "Basic (username & password dari .env)" },
@@ -122,12 +116,45 @@ export default function Home() {
         </section>
 
         <section class="card">
-          <h2>Langkah Cepat</h2>
-          <ol>
-            {steps.map((item) => (
-              <li>{item}</li>
-            ))}
-          </ol>
+          <h2>compose.yml</h2>
+          <div class="snippet">
+            <pre>{`services:
+  apitelegraph:
+    image: banghasan/api-telegraph
+    container_name: apitelegraph
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"`}</pre>
+          </div>
+        </section>
+
+        <section class="card">
+          <h2>File .env</h2>
+          <div class="snippet">
+            <pre>{`BASIC_AUTH_USERNAME=superuser
+BASIC_AUTH_PASSWORD=superpass
+TELEGRAPH_TOKEN=your_telegraph_access_token`}</pre>
+          </div>
+        </section>
+
+        <section class="card">
+          <h2>Telegraph Token</h2>
+          <p class="muted">
+            Bisa didapatkan cepat via <code>curl</code> sesuai{" "}
+            <a href="https://telegra.ph/api#createAccount">Telegra.ph API</a>.
+          </p>
+          <div class="snippet">
+            <pre>{`curl "https://api.telegra.ph/createAccount?short_name=botIndonesia&author_name=Anonymous"`}</pre>
+          </div>
+        </section>
+
+        <section class="card">
+          <h2>Menjalankan</h2>
+          <div class="snippet">
+            <pre>docker compose up -d</pre>
+          </div>
         </section>
 
         <section class="card">
@@ -151,13 +178,18 @@ export default function Home() {
   -d '{ "title": "Contoh Artikel", "content": "# Halo \\n Konten **Markdown**" }'`}</pre>
           </div>
           <p class="muted" style="margin-top: 0.9rem;">
-            Diskusi dan support di{" "}
-            <a href="https://t.me/botindonesia">Telegram Bot Indonesia</a>
+            Dokumentasi lengkap ada pada{" "}
+            <a href="https://github.com/banghasan/api-telegraph">
+              Github Repository
+            </a>{" "}
+            ini
           </p>
         </section>
 
         <p class="footer">
-          Dokumentasi lengkap tersedia di README.md dalam repo ini.
+          (c) 2025 <a href="https://banghasan.com">bangHasan.com</a>
+          <br /> Diskusi dan support di{" "}
+          <a href="https://t.me/botindonesia">Telegram Bot Indonesia</a>
         </p>
       </main>
     </>
