@@ -50,10 +50,26 @@ BASIC_AUTH_PASSWORD=superpass
 TELEGRAPH_TOKEN=your_telegraph_access_token
 ```
 
-### Menjalankan
+## Menjalankan
 
 ```bash
-docker compose up -d
+deno task dev   # mode pengembangan dengan auto-reload
+deno task start # menjalankan server produksi
+```
+
+Server default berjalan di `http://localhost:8000`.
+
+### Docker
+
+```bash
+docker build -t banghasan/api-telegraph .
+docker run --rm -p 8000:8000 --env-file .env banghasan/api-telegraph
+```
+
+Atau gunakan `docker-compose`:
+
+```bash
+docker compose up --build
 ```
 
 ## Endpoint
