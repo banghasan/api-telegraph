@@ -1,28 +1,13 @@
-# Telegraph Markdown API (Fresh + Deno)
+# Microservice API Telegra.ph
 
-API ringan berbasis [Fresh](https://fresh.deno.dev) untuk mempublikasikan konten
-Markdown ke [Telegra.ph](https://telegra.ph) menggunakan library
-[`dcdunkan/telegraph`](https://github.com/dcdunkan/telegraph).
+Microservice API ringan berbasis untuk mempublikasikan tulisan atau artikel atau konten
+berbasis Markdown atau HTML ke [Telegra.ph](https://telegra.ph).
 
-## Persiapan
+## Quick Install
 
-1. **Salin variabel lingkungan**
-   ```bash
-   cp .env.example .env
-   ```
-2. **Isi `.env`** dengan kredensial Anda:
-   - `BASIC_AUTH_USERNAME` & `BASIC_AUTH_PASSWORD`: digunakan untuk Basic Auth
-     di endpoint API.
-   - `TELEGRAPH_TOKEN`: access token Telegraph yang bisa dibuat lewat Bot
-     @telegraph.
+### compose.yml
 
-## Docker compose
-
-### compose
-
-Buat file `compose.yml`
-
-```compose.yml
+```
 services:
   apitelegraph:
     image: banghasan/api-telegraph
@@ -34,19 +19,27 @@ services:
       - "8000:8000"
 ```
 
-### env
+### File .env
 
-Buat file .env 
-
-```.env
+```
 BASIC_AUTH_USERNAME=superuser
 BASIC_AUTH_PASSWORD=superpass
 TELEGRAPH_TOKEN=your_telegraph_access_token
 ```
 
+### Telegprah Token
+
+Bisa didapatkan mudah dengan curl
+
+```sh
+curl https://api.telegra.ph/createAccount?short_name=botIndonesia&author_name=Anonymous
+```
+
+Sesuai [Telegra.ph Api](https://telegra.ph/api#createAccount)
+
 ### Menjalankan
 
-```bash
+```
 docker compose up -d
 ```
 
@@ -100,3 +93,7 @@ Respons sukses:
 
 Silakan sesuaikan data di atas sesuai kebutuhan Anda. Pastikan token Telegraph
 memiliki izin membuat halaman.
+
+## Komunitas
+
+Diskusi dan support di [Bot Telegram Indonesia](https://t.me/botindonesia)
